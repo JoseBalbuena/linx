@@ -4,7 +4,7 @@
   "description": "Linx APP",
   "main": "linxapp.js",
   "dependencies": {
-    "express": "latest",
+    "express": "latest"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
