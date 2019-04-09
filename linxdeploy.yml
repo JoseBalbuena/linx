@@ -1,0 +1,28 @@
+---
+- hosts: jenkins 
+  tasks:
+  - name: Doing Backup of node_modules  
+    command: "cp -Rf {{ansible_env.HOME}}/linxapp/node_modules {{ansible_env.HOME}}/linxapp/node_modules.bkp"
+
+  - name: Doing Backup of package.json
+    command: "cp -Rf {{ansible_env.HOME}}/linxapp/package.json {{ansible_env.HOME}}/linxapp/package.json.bkp"
+
+  - name: Copy New package.json file
+    copy:
+      src: package.json 
+      dest: "{{ansible_env.HOME}}/linxapp/package.json.new" 
+
+  - name: Deleting old package.json file
+    command: "rm -f {{ansible_env.HOME}}/linxapp/package.json"
+
+  - name: Renaming new package.json
+    command: "mv {{ansible_env.HOME}}/linxapp/package.json.new {{ansible_env.HOME}}/linxapp/package.json"  
+
+  - name: Running npm install in order to install/upgrade new dependencies
+    shell:
+      cmd: npm install
+      chdir: "{{ansible_env.HOME}}/linxapp"
+
+  - name: Reload Application using PM2 0-second-downtime
+    command: pm2 reload linxapp
+

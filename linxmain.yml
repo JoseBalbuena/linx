@@ -1,0 +1,151 @@
+---
+- hosts: jenkins 
+  tasks:
+  - name: Install git in Ubuntu VM 18.04
+    apt:
+      name: git
+      state: present 
+      update_cache: yes
+    become: yes
+
+  - name: Install openssl in Ubuntu VM 18.04
+    apt:
+      name: openssl 
+      state: present
+      update_cache: yes
+    become: yes
+
+  - name: Download NODE LTS last release 
+    get_url:
+      url: "https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.xz" 
+      dest: "{{ ansible_env.HOME }}" 
+
+  - name: Untar node.xz file
+    unarchive:
+      src: "{{ ansible_env.HOME }}/node-v10.15.3-linux-x64.tar.xz"
+      dest: "{{ansible_env.HOME}}" 
+      remote_src: yes
+   
+  - name: Rename node dir 
+    command: "mv {{ansible_env.HOME}}/node-v10.15.3-linux-x64 $HOME/node"
+
+  - name: Delete tar file
+    command: "rm {{ansible_env.HOME}}/node-v10.15.3-linux-x64.tar.xz"
+
+  - name: Create /usr/bin/node link
+    command: "ln -s {{ansible_env.HOME}}/node/bin/node /usr/bin/node"
+    become: yes
+
+  - name: Create /usr/bin/npm link 
+    command: "ln -s {{ansible_env.HOME}}/node/lib/node_modules/npm/bin/npm-cli.js /usr/bin/npm"
+    become: yes
+
+  - name: Create /usr/bin/npx link
+    command: "ln -s {{ansible_env.HOME}}/node/lib/node_modules/npm/bin/npx-cli.js /usr/bin/npx"
+    become: yes
+
+  - name: Install PM2 Global
+    command: "npm install pm2 -g"  
+
+  - name: Create /usr/bin/pm2 Link
+    command: "ln -s {{ansible_env.HOME}}/node/lib/node_modules/pm2/bin/pm2 /usr/bin/pm2"
+    become: yes
+
+  - name: Create linxapp dir
+    command: "mkdir {{ansible_env.HOME}}/linxapp"
+
+  - name: Copy linxapp.js file
+    copy:
+      src: linxapp.js 
+      dest: "{{ansible_env.HOME}}/linxapp/linxapp.js" 
+
+  - name: Copy package.json file
+    copy:
+      src: package.json 
+      dest: "{{ansible_env.HOME}}/linxapp/package.json"
+
+  - name: Copy load-balancer.conf file
+    copy:
+      src: load-balancer.conf 
+      dest: "{{ansible_env.HOME}}/linxapp/load-balancer.conf"
+
+  - name: Copy watchdog script
+    copy:
+      src: watchdog.bash 
+      dest: "{{ansible_env.HOME}}/linxapp/watchdog.bash"
+
+  - name: Copy benchmark script
+    copy:
+      src: benchmark.bash
+      dest: "{{ansible_env.HOME}}/linxapp/benchmark.bash"
+
+  - name: Copy parse script
+    copy:
+      src: parselog.bash
+      dest: "{{ansible_env.HOME}}/linxapp/parselog.bash"
+
+
+#  - name: Clone Linx APP Git repository
+#    git:
+#      repo: "https://github.com/JoseBalbuena/linx.git" 
+#      dest: "{{ansible_env.HOME}}/linxapp" 
+
+  - name: Install Express Dependency
+    shell:
+      cmd: npm install
+      chdir: "{{ansible_env.HOME}}/linxapp"
+
+  - name: Run node.js app, using pm2, with a process per core Cluster Mode
+    shell: 
+      cmd: pm2 start linxapp.js -i max 
+      chdir: "{{ansible_env.HOME}}/linxapp"
+
+  - name: Install nginx at the latest version
+    apt: 
+      name: nginx 
+      state: latest
+    become: yes
+
+  - name: Start nginx
+    service:
+       name: nginx
+       state: started
+    become: yes
+   
+  - name: copy the nginx load-balancer config file and restart nginx
+    command: "mv {{ansible_env.HOME}}/linxapp/load-balancer.conf /etc/nginx/conf.d/load-balancer.conf" 
+    become: yes
+
+  - name: Deleting default nginx page
+    command: "rm -f /etc/nginx/sites-enabled/default"
+    become: yes
+
+  - name: Creating a Self Signed Certify in order to enable HTTPS
+    command: 'openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout {{ansible_env.HOME}}/linxapp/localhost.key -out {{ansible_env.HOME}}/linxapp/localhost.crt -subj "/C=BR/ST=RS/L=Uruguaiana/O=Linx/OU=IT Department/CN=example.com"'
+    become: yes
+
+  - name: Moving the Certify to correct places
+    command: "mv {{ansible_env.HOME}}/linxapp/localhost.crt /etc/ssl/certs/localhost.crt"
+    become: yes
+
+  - name: Moving the Certify to correct places
+    command: "mv {{ansible_env.HOME}}/linxapp/localhost.key /etc/ssl/private/localhost.key"
+    become: yes
+
+  - name: restart nginx
+    service:
+       name: nginx
+       state: restarted
+    become: yes 
+
+  - name: Giving Executable permission to whatchdog script
+    command: "chmod +x {{ansible_env.HOME}}/linxapp/watchdog.bash"
+    become: yes
+
+  - name: Putting in root cron the watchdog script
+    cron:
+      name: "check nginx linxapp processes"
+      minute: "*/5"
+      job: "{{ansible_env.HOME}}/linxapp/watchdog.bash > /dev/null"
+    become: yes
+

@@ -1,0 +1,21 @@
+---
+- hosts: jenkins 
+  tasks:
+  - name: Renaming node_modules to node_modules.failed 
+    command: "mv {{ansible_env.HOME}}/linxapp/node_modules {{ansible_env.HOME}}/linxapp/node_modules.failed"
+
+  - name: Renaming package.json to package.json.failed
+    command: "mv {{ansible_env.HOME}}/linxapp/package.json {{ansible_env.HOME}}/linxapp/package.json.failed"
+
+  - name: Renaming node_modules.bkp to node_modules
+    command: "mv {{ansible_env.HOME}}/linxapp/node_modules.bkp {{ansible_env.HOME}}/linxapp/node_modules"
+
+  - name: Renaming package.json.bkp to package.json
+    command: "mv {{ansible_env.HOME}}/linxapp/package.json.bkp {{ansible_env.HOME}}/linxapp/package.json"
+
+  - name: Deleting package-lock.json
+    command: "rm -f {{ansible_env.HOME}}/linxapp/package-lock.json"
+
+  - name: Reload Application using PM2 0-second-downtime
+    command: pm2 reload linxapp
+
