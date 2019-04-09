@@ -1,0 +1,23 @@
+{
+  "name": "linxapp",
+  "version": "1.0.0",
+  "description": "Linx APP",
+  "main": "linxapp.js",
+  "dependencies": {
+    "express": "latest"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseBalbuena/linx.git"
+  },
+  "author": "Jose Palacios",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoseBalbuena/linx/issues"
+  },
+  "homepage": "https://github.com/JoseBalbuena/linx#readme"
+}
+
