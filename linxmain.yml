@@ -74,15 +74,15 @@
       src: watchdog.bash 
       dest: "{{ansible_env.HOME}}/linxapp/watchdog.bash"
 
-  - name: Copy benchmark script
-    copy:
-      src: benchmark.bash
-      dest: "{{ansible_env.HOME}}/linxapp/benchmark.bash"
+#  - name: Copy benchmark script
+#    copy:
+#      src: benchmark.bash
+#      dest: "{{ansible_env.HOME}}/linxapp/benchmark.bash"
 
-  - name: Copy parse script
-    copy:
-      src: parselog.bash
-      dest: "{{ansible_env.HOME}}/linxapp/parselog.bash"
+#  - name: Copy parse script
+#    copy:
+#      src: parselog.bash
+#      dest: "{{ansible_env.HOME}}/linxapp/parselog.bash"
 
 
 #  - name: Clone Linx APP Git repository
