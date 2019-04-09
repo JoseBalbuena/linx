@@ -4,6 +4,7 @@
   "description": "Linx APP",
   "main": "linxapp.js",
   "dependencies": {
+    "underscore": "latest",
     "express": "latest"
   },
   "scripts": {
