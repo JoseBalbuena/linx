@@ -1,0 +1,8 @@
+---
+- hosts: jenkins 
+  tasks:
+  - name: Run benchmark script 
+    command: "{{ansible_env.HOME}}/linxapp/benchmark.bash" 
+    register: benchmark 
+
+  - debug: msg="{{ benchmark.stdout }}"
