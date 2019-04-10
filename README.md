@@ -248,7 +248,7 @@ PLAY RECAP *********************************************************************
 
 [jose@rejane linx]$ 
 ```
-
+![Image] (https://github.com/JoseBalbuena/linx/blob/master/email.png)
 
 
 
