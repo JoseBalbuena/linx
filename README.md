@@ -18,7 +18,7 @@ Para testar os playbooks é preciso os seguintes requisitos:
 4. **parserlog.py**: Script de parseamento dos logs de acesso do nginx, e encarregado de enviar e-mail
 5. **linxdeploy.yml**: Playbook de deploy, encarregado de fazer backup do diretório node_modules, package.json da aplicação node e instalar as novas dependencias, a aplicação é restartada utilizando PM2 reload, garantindo zero downtime.
 6. **linxrollback.yml**: Playbook de rollback, encarregado de voltar à versão anterior do diretório node_modules e package.json,a aplicação é restartada utilizando PM2 reload, garantindo zero downtime.
-7. **linxbenchmark.yml**: Playbook encarregado de iniciar o script de benchmark na VM. Ele printara o resultado na tela também.
+7. **linxbenchmark.yml**: Playbook encarregado de iniciar o script de benchmark na VM. O resultado é printado na tela.
 8. **linxparserlog.yml**: Playbook que executa o script de parseamento dos logs do nginx. O resultado é printado na tela.
 9. **watchdog.j2**: Arquivo Jinja que irá se transformar no script de monitoramento das aplicações nginx, e node. 
 10. **linxinventory.cfg**: Arquivo de inventário do Ansible, aqui será setada os parâmetros para conexão.
