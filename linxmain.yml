@@ -72,7 +72,7 @@
       dest: "{{ansible_env.HOME}}/linxapp/watchdog.bash"
 
   - name: Copy benchmark script
-    copy:
+    template:
       src: benchmark.j2
       dest: "{{ansible_env.HOME}}/linxapp/benchmark.bash"
 
