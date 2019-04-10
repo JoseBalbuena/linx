@@ -67,8 +67,8 @@
       dest: "{{ansible_env.HOME}}/linxapp/load-balancer.conf"
 
   - name: Copy watchdog script
-    copy:
-      src: watchdog.bash 
+    template:
+      src: watchdog.j2 
       dest: "{{ansible_env.HOME}}/linxapp/watchdog.bash"
 
   - name: Copy benchmark script
