@@ -81,10 +81,15 @@
     become: yes
 
 
-#  - name: Copy parse script
-#    copy:
-#      src: parselog.bash
-#      dest: "{{ansible_env.HOME}}/linxapp/parselog.bash"
+  - name: Copy parse script
+    copy:
+      src: parselog.py
+      dest: "{{ansible_env.HOME}}/linxapp/parselog.py"
+
+  - name: Giving Executable permission to parselog script
+    command: "chmod +x {{ansible_env.HOME}}/linxapp/parselog.py"
+    become: yes
+
 
 
 #  - name: Clone Linx APP Git repository
@@ -149,5 +154,13 @@
       name: "check nginx linxapp processes"
       minute: "*/5"
       job: "{{ansible_env.HOME}}/linxapp/watchdog.bash > /dev/null"
+    become: yes
+
+  - name: Putting in root cron the parser script, in order to send email everyday. The script will run at midnight
+    cron:
+      name: "parser log script"
+      minute: "0"
+      hour: "0"
+      job: "{{ansible_env.HOME}}/linxapp/parserlog.py > /dev/null"
     become: yes
 
