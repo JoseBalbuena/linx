@@ -1,0 +1,9 @@
+---
+- hosts: jenkins 
+  tasks:
+  - name: Run parser script 
+    command: "{{ansible_env.HOME}}/linxapp/parserlog.py" 
+    register: parser 
+
+  - debug: msg="{{parser.stdout_lines}}" 
+
