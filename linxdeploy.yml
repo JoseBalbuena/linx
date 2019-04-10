@@ -1,5 +1,5 @@
 ---
-- hosts: jenkins 
+- hosts: all 
   tasks:
   - name: Doing Backup of node_modules  
     command: "cp -Rf {{ansible_env.HOME}}/linxapp/node_modules {{ansible_env.HOME}}/linxapp/node_modules.bkp"

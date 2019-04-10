@@ -1,5 +1,5 @@
 ---
-- hosts: jenkins 
+- hosts: all 
   tasks:
   - name: Run benchmark script 
     command: "{{ansible_env.HOME}}/linxapp/benchmark.bash" 

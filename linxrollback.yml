@@ -1,5 +1,5 @@
 ---
-- hosts: jenkins 
+- hosts: all 
   tasks:
   - name: Renaming node_modules to node_modules.failed 
     command: "mv {{ansible_env.HOME}}/linxapp/node_modules {{ansible_env.HOME}}/linxapp/node_modules.failed"

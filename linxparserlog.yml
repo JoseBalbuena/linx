@@ -1,5 +1,5 @@
 ---
-- hosts: jenkins 
+- hosts: all 
   tasks:
   - name: Run parser script 
     command: "{{ansible_env.HOME}}/linxapp/parserlog.py" 

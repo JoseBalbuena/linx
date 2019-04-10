@@ -1,5 +1,5 @@
 ---
-- hosts: jenkins 
+- hosts: all 
   tasks:
   - name: Install git,openssl,ApacheBench in Ubuntu VM 18.04
     apt:
