@@ -40,8 +40,9 @@ Para testar os playbooks é preciso os seguintes requisitos:
 1. Clonar o repositorio git no servidor Ansible.
   * git clone https://github.com/JoseBalbuena/linx.git
   
+  O clone irá criar o diretório "linx" no servidor ansible.
 
-2. Entrar no diretório "linx" criado no servidor ansible, e modificar os parâmetros de conexão dentro do arquivo linxinventory.cfg
+2. Entrar no diretório "linx" criado no servidor ansible, e modificar os parâmetros de conexão dentro do arquivo linxinventory.cfg, ip , usuário e senha.
 ```
 [linx]
 12.12.12.3
@@ -72,7 +73,7 @@ message = msg
 ansible-playbook -i linxinventory.cfg linxmain.yml 
 ```
 
-Finalizado o playbook, você deverá ter um ambiente totalmente funcional, testando:
+Finalizado o playbook, você deverá ter um ambiente totalmente funcional para HTTP e HTTPS, testando:
 ```
 [jose@rejane linx]$ curl http://12.12.12.3/
 Hello World!
@@ -117,7 +118,7 @@ root@osboxes:~# crontab -l
 root@osboxes:~# 
 ```
 
-6. Dentro do diretório "linx" no servidor ansible modificar o arquivo package.json, adicionando uma nova dependencia 
+6. Dentro do diretório "linx" no servidor ansible modificar o arquivo package.json, adicionando uma nova dependencia no exemplo "underscore". 
 ```
 "underscore"
   "dependencies": {
@@ -129,7 +130,7 @@ root@osboxes:~#
 ```
 [jose@rejane linx]$ ansible-playbook -i linxinventory.cfg linxdeploy.yml 
 ```
-Verificando se o backup do node_modules foi executado:
+Verificando se o backup das dependencias,node_modules foi executado:
 ```
 osboxes@osboxes:~/linxapp$ ls -ltrah | grep -i modules
 drwxrwxr-x 51 osboxes osboxes 4.0K Apr 10 17:13 node_modules.bkp
@@ -167,7 +168,7 @@ osboxes@osboxes:~/linxapp$
 ```
 
 
-9. Parando os processos nginx e pm2.
+9. Parando os processos nginx e pm2 na VM.
 ```
 osboxes@osboxes:~/linxapp$ sudo systemctl stop nginx
 [sudo] password for osboxes: 
@@ -188,6 +189,7 @@ osboxes@osboxes:~/linxapp$
 ```
 
 Esperar uns 5 minutos, os processos deveriam ter sido levantados sozinhos pelo script whatchdog.bash na cron de root.
+Verificando na VM.
 
 ```
 osboxes@osboxes:~/linxapp$ sudo su -
