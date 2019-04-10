@@ -1,25 +1,15 @@
 ---
 - hosts: jenkins 
   tasks:
-  - name: Install git in Ubuntu VM 18.04
+  - name: Install git,openssl,ApacheBench in Ubuntu VM 18.04
     apt:
-      name: git
+      name: "{{ item }}" 
       state: present 
       update_cache: yes
-    become: yes
-
-  - name: Install openssl in Ubuntu VM 18.04
-    apt:
-      name: openssl 
-      state: present
-      update_cache: yes
-    become: yes
-
-  - name: Install ApacheBench in Ubuntu VM 18.04
-    apt:
-      name: apache2-utils 
-      state: present
-      update_cache: yes
+    with_items:
+      - 'git'
+      - 'openssl'
+      - 'apache2-utils'
     become: yes
 
   - name: Download NODE LTS last release 
