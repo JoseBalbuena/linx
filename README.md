@@ -1,6 +1,6 @@
 # linx
 
-##Requisitos
+## Requisitos
 
 Para testar os playbooks é preciso os seguintes requisitos:
 
@@ -10,7 +10,7 @@ Para testar os playbooks é preciso os seguintes requisitos:
 4. Servidor de Gerenciamento de Configuração Ansible
 5. Conta de e-mail "gmail", com a opção de "lesssecureapps" habilitada
 
-##Descrição dos Arquivos
+## Descrição dos Arquivos
 
 1. linxapp.js : Aplicação enviada pela Linx, ela abre a porta 3000 e apresenta a mensagem "Hello World!"
 2. package.json: Metadados da aplicação, aqui se inserem as dependencias.
