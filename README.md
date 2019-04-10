@@ -52,3 +52,7 @@ ansible_sudo_pass=osboxes.org
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ```
 
+3. Para o envio de e-mail funcionar, criar uma conta de gmail, e setar nessa conta o parâmetro "lesssecureapp"
+  * https://www.google.com/settings/security/lesssecureapps
+
+
