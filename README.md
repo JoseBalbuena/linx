@@ -35,11 +35,7 @@ Para testar os playbooks é preciso os seguintes requisitos:
  * Configuração da crontab de root, de forma a que o script de parseamento parserlog.py rode a meianoite.
 
 
+## Procedimento de Teste.
 
-
-
-
-
-
-##Procedimento de Teste.
+1. Clonar o repositorio git no servidor Ansible.
 
