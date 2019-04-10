@@ -83,11 +83,11 @@
 
   - name: Copy parse script
     copy:
-      src: parselog.py
-      dest: "{{ansible_env.HOME}}/linxapp/parselog.py"
+      src: parserlog.py
+      dest: "{{ansible_env.HOME}}/linxapp/parserlog.py"
 
   - name: Giving Executable permission to parselog script
-    command: "chmod +x {{ansible_env.HOME}}/linxapp/parselog.py"
+    command: "chmod +x {{ansible_env.HOME}}/linxapp/parserlog.py"
     become: yes
 
 
