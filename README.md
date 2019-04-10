@@ -4,7 +4,7 @@
 
 Para testar os playbooks é preciso os seguintes requisitos:
 
-1. Ubuntu 18.04 LTS
+1. VM Ubuntu 18.04 LTS
 2. python,python3
 3. Acesso SSH ao cliente.
 4. Servidor de Gerenciamento de Configuração Ansible
@@ -71,6 +71,12 @@ ansible-playbook -i linxinventory.cfg linxmain.yml
 ```
 
 Finalizado o playbook, você deverá ter um ambiente totalmente funcional, testando:
+
+curl http://ip_address_vm/
+curl http://ip_address_vm/
+
+Número de processo, um por core CPU:
+
 
 
 
