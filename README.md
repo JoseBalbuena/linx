@@ -24,7 +24,7 @@ Para testar os playbooks é preciso os seguintes requisitos:
 10. **linxinventory.cfg**: Arquivo de inventário do Ansible, aqui será setada os parâmetros para conexão.
 11. **benchmark.j2**: Template Jinja dos testes de carga da aplicação utilizando o utilitario "ab".
 12. **linxmain.yml**: Playbook principal, ele irá fazer as seguintes tarefas:
-...Instalação dos pacotes git,openssl,apache2-utils,node,PM2,nginx.
+ * Instalação dos pacotes git,openssl,apache2-utils,node,PM2,nginx.
 ...Criação do diretório "linxapp" e copia dos arquivos linxapp.js, package.json,parserlog.py,watchdog.bash,benchmark.bash.
 ...Criação dos symbolic link, para ter os binários node, npm, npx, pm2 disponivéis em todo o sistema.
 ...Instalação da dependencia "express".
