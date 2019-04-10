@@ -11,5 +11,5 @@ fi
 ps -ef | grep linxapp.js |grep -v grep > /dev/null
 if [ $? != 0 ]
 then
-    su -l {{ansible_user}} -c "   pm2 start linxapp" > /dev/null
+    su -l {{ansible_user}} -c "pm2 start linxapp" > /dev/null
 fi
