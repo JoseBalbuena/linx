@@ -73,7 +73,7 @@
 
   - name: Copy benchmark script
     copy:
-      src: benchmark.bash
+      src: benchmark.j2
       dest: "{{ansible_env.HOME}}/linxapp/benchmark.bash"
 
   - name: Giving Executable permission to benchmark script
