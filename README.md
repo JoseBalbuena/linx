@@ -52,7 +52,26 @@ ansible_sudo_pass=osboxes.org
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ```
 
-3. Para o envio de e-mail funcionar, criar uma conta de gmail, e setar nessa conta o parâmetro "lesssecureapp"
+3. Para o envio de e-mail funcionar, criar uma conta de gmail, e habilitar o parâmetro "lesssecureapp"
   * https://www.google.com/settings/security/lesssecureapps
+
+4. No script parser.py inserir os dados de e-mail, senha da conta criada
+```
+port = 587  # For starttls
+smtp_server = "smtp.gmail.com"
+sender_email = "jbalbuen22@gmail.com"
+receiver_email = "jbalbuen22@gmail.com"
+password = "XXXXXXXX" 
+message = msg 
+```
+
+5. Executar o playbook principal linxmain.yml
+```
+ansible-playbook -i linxinventory.cfg linxmain.yml 
+```
+
+Finalizado o playbook, você deverá ter um ambiente totalmente funcional, testando:
+
+
 
 
