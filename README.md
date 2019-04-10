@@ -14,7 +14,7 @@ Para testar os playbooks é preciso os seguintes requisitos:
 
 1. **linxapp.js** : Aplicação enviada pela Linx, ela abre a porta 3000 e apresenta a mensagem "Hello World!"
 2. **package.json**: Metadados da aplicação, aqui se inserem as dependencias.
-3. **load-balancer.conf**: Arquivo de configuração de proxy reverso para o nginx
+3. **load-balancer.conf**: Arquivo de configuração de proxy reverso para o nginx com load balance configurado.
 4. **parserlog.py**: Script de parseamento dos logs de acesso do nginx, e encarregado de enviar e-mail
 5. **linxdeploy.yml**: Playbook de deploy, encarregado de fazer backup do diretório node_modules, package.json da aplicação node e instalar as novas dependencias, a aplicação é restartada utilizando PM2 reload, garantindo zero downtime.
 6. **linxrollback.yml**: Playbook de rollback, encarregado de voltar à versão anterior do diretório node_modules e package.json,a aplicação é restartada utilizando PM2 reload, garantindo zero downtime.
