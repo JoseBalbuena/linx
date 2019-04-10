@@ -5,8 +5,5 @@
     command: "{{ansible_env.HOME}}/linxapp/benchmark.bash" 
     register: benchmark 
 
-  - debug: msg="{{item}}"
-    whith_items: benchmark.stdout_lines
-    when: result.stdout_lines
-
+  - debug: msg="{{benchmark.stdout_lines}}" 
 
