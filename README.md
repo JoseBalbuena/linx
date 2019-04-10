@@ -38,4 +38,17 @@ Para testar os playbooks é preciso os seguintes requisitos:
 ## Procedimento de Teste.
 
 1. Clonar o repositorio git no servidor Ansible.
+  * git clone https://github.com/JoseBalbuena/linx.git
+
+2. Modificar os parâmetros de conexão dentro do arquivo linxinventory.cfg
+```
+[linx]
+12.12.12.3
+[linx:vars]
+ansible_ip=12.12.12.3
+ansible_user=osboxes
+ansible_ssh_pass=osboxes.org
+ansible_sudo_pass=osboxes.org
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+```
 
