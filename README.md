@@ -58,7 +58,7 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 3. Para o envio de e-mail funcionar, criar uma conta de gmail, e habilitar o parâmetro "lesssecureapp"
   * https://www.google.com/settings/security/lesssecureapps
 
-4. No script parser.py inserir os dados de e-mail, senha da conta criada
+4. No script parserlog.py inserir os dados de e-mail, senha da conta criada
 ```
 port = 587  # For starttls
 smtp_server = "smtp.gmail.com"
